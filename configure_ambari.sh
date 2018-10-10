@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export cloud_to_use=static
 
 source $(dirname "${BASH_SOURCE[0]}")/set_cloud.sh
 
