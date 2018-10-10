@@ -3,7 +3,7 @@
 ## cluster configuration ##
 ###########################
 
-cluster_name: 'mytestcluster'
+cluster_name: 'DistributedComputingCluster'
 
 ambari_version: '2.7.1.0'                                 # must be the 4-part full version number
 
@@ -24,7 +24,7 @@ repo_base_url: 'http://public-repo-1.hortonworks.com'     # change this if using
 ###########################
 
 external_dns: yes                                         # set to yes to use the existing DNS (when no, it will update the /etc/hosts file - must be set to 'no' when using Azure)
-disable_firewall: no                                      # set to yes to disable the existing local firewall service (iptables, firewalld, ufw)
+disable_firewall: yes                                     # set to yes to disable the existing local firewall service (iptables, firewalld, ufw)
 
 
 ########################
@@ -161,7 +161,7 @@ blueprint_name: '{{ cluster_name }}_blueprint'            # the name of the blue
 blueprint_file: 'blueprint_dynamic.j2'                    # the blueprint JSON file - 'blueprint_dynamic.j2' is a Jinja2 template that generates the required JSON
 blueprint_dynamic:                                        # properties for the dynamic blueprint - these are only used by the 'blueprint_dynamic.j2' template to generate the JSON
   - host_group: "hdp-master"
-    clients: ['ZOOKEEPER_CLIENT', 'HDFS_CLIENT', 'YARN_CLIENT', 'MAPREDUCE2_CLIENT', 'TEZ_CLIENT', 'PIG', 'SQOOP', 'HIVE_CLIENT', 'OOZIE_CLIENT', 'INFRA_SOLR_CLIENT', 'SPARK2_CLIENT']
+    clients: ['ZOOKEEPER_CLIENT', 'HDFS_CLIENT', 'YARN_CLIENT', 'MAPREDUCE2_CLIENT', 'SPARK2_CLIENT']
     services:
       - ZOOKEEPER_SERVER
       - NAMENODE
@@ -172,26 +172,11 @@ blueprint_dynamic:                                        # properties for the d
       - TIMELINE_READER
       - HISTORYSERVER
       - SPARK2_JOBHISTORYSERVER
-      - HIVE_SERVER
-      - HIVE_METASTORE
-      - OOZIE_SERVER
-      - KNOX_GATEWAY
-      - AMBARI_SERVER
-      - INFRA_SOLR
-      - METRICS_COLLECTOR
-      - METRICS_GRAFANA
-      - METRICS_MONITOR
-      - HST_SERVER
-      - ACTIVITY_ANALYZER
-      - ACTIVITY_EXPLORER
-      - HST_AGENT
   - host_group: "hdp-slave"
-    clients: ['ZOOKEEPER_CLIENT', 'HDFS_CLIENT', 'YARN_CLIENT', 'MAPREDUCE2_CLIENT', 'TEZ_CLIENT', 'PIG', 'SQOOP', 'HIVE_CLIENT', 'OOZIE_CLIENT', 'INFRA_SOLR_CLIENT', 'SPARK2_CLIENT']
+    clients: ['ZOOKEEPER_CLIENT', 'HDFS_CLIENT', 'YARN_CLIENT', 'MAPREDUCE2_CLIENT', 'SPARK2_CLIENT']
     services:
       - DATANODE
       - NODEMANAGER
-      - METRICS_MONITOR
-      - HST_AGENT
 
 
 
